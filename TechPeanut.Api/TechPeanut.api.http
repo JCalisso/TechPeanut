@@ -1,0 +1,6 @@
+@TechPeanut.api_HostAddress = http://localhost:5111
+
+GET {{TechPeanut.api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
