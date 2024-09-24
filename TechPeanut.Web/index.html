@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/TechPeanut/TechPeanut.Web/src/styles/stylesheet.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechPeanut</title>
+</head>
+<body>
+
+<div class="logo-container">
+    <img src="/TechPeanut/TechPeanut.Web/src/img/logoLogin.jpg" alt="Logo TechPeanut">
+</div>
+
+<h1 style="font-size: 30px; margin-top: -15px;">Bem-vindo a TechPeanut, faça seu login abaixo!</h1>
+
+<div class="login-container">
+    <h2 class="roboto-medium" style="margin-top: -10px;">Login</h2>
+    <hr>
+    <form action="login.php" method="POST">
+        <h4 style="margin: 0px;">E-mail</h4>
+        <input type="text" name="usuario" placeholder="Usuário" required>
+        <h4 style="margin: 0px;">Senha</h4>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <a style="color: #fff; margin-left: 170px; font-size: 12px; margin-top: -10px;" href="#" class="forgot-password">Esqueceu sua senha?</a>
+        <br>
+        <button type="submit">Entrar</button>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+            <a style="color: #492300; font-size: 12px;" href="#" class="forgot-password">Ainda não tem Conta?</a>
+            <button style="font-size: 7px; margin-top: 15px; width: 20%; border-radius: 8px;">Cadastre-se</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
