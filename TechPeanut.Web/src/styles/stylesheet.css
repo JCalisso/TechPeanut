@@ -132,3 +132,133 @@
         font-weight: 900;
         font-style: italic;
         }
+        /* Estilo da barra superior */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #343a40;
+            padding: 10px 20px;
+            color: white;
+            position: fixed; /* Fixa a navbar no topo da página */
+            top: 0;
+            left: 0;
+            right: 0; /* Expande a navbar para ocupar toda a largura */
+            z-index: 1000; /* Garante que fique acima de outros elementos */
+        }
+
+        /* Estilo do menu de navegação */
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            position: relative; /* Necessário para o posicionamento dos submenus */
+        }
+
+        /* Estilo das opções do menu */
+        .nav-link {
+            color: white;
+            padding: 10px 25px;
+            text-decoration: none;
+            position: relative; /* Necessário para posicionar o submenu */
+        }
+
+        /* Estilo do menu dropdown */
+        .dropdown-menu {
+            display: none; /* Esconde o menu por padrão */
+            position: absolute; /* Para posicionar o submenu em relação ao item pai */
+            background-color: #343a40; /* Cor de fundo do menu */
+            border: none; /* Remove a borda padrão */
+            z-index: 1000; /* Garante que o menu fique acima de outros elementos */
+            padding: 0; /* Remove o preenchimento padrão */
+            margin: 0; /* Remove a margem padrão */
+            top: 100%; /* Posiciona o submenu logo abaixo do item pai */
+            left: 0; /* Alinha o submenu à esquerda do item pai */
+            width: 150px; /* Largura fixa para o submenu */
+            border-top: 1px solid #495057; /* Borda superior para separar o submenu do item pai */
+            list-style-type: none; /* Remove as bolinhas do submenu */
+        }
+
+        /* Exibir o dropdown quando a classe 'show' for adicionada */
+        .dropdown-menu.show {
+            display: block; /* Mostra o menu */
+        }
+
+        /* Exibe o menu dropdown ao clicar no item pai */
+        .nav-item.active .dropdown-menu {
+            display: block; /* Mostra o menu quando o item pai está ativo */
+        }
+
+        /* Estilo das opções do submenu */
+        .dropdown-item {
+            color: white; /* Cor do texto das opções do submenu */
+            padding: 10px 15px; /* Espaçamento interno das opções */
+            text-decoration: none; /* Remove o sublinhado */
+            display: block; /* Faz as opções ocuparem toda a largura do submenu */
+        }
+
+        /* Estilo ao passar o mouse sobre as opções do submenu */
+        .dropdown-item:hover {
+            background-color: #495057; /* Cor de fundo ao passar o mouse */
+        }
+
+        /* Estilo do conteúdo principal */
+        .content {
+            margin-top: 60px; /* Espaçamento para evitar que o conteúdo fique atrás da navbar */
+            padding: 20px; /* Espaçamento interno */
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .logo-container img {
+            width: 25%; 
+        }
+
+        /* Dropdown Button */
+        .dropbtn {
+            background-color: #3498DB;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Dropdown button on hover & focus */
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #2980B9;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {background-color: #ddd;}
+
+        /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+        .show {display:block;}
