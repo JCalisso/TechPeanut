@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechPeanut - Dashboard</title>
+    <link rel="stylesheet" href="/TechPeanut/TechPeanut.Web/src/styles/stylesheet.css">
+
+</head>
+<body>
+    <nav class="navbar">
+        <a class="roboto-bold" href="/TechPeanut/TechPeanut.Web/listaUsers.html" style="color: white; font-size: 25px;">TechPeanut</a>
+        <div class="navbar-nav">
+            <div class="nav-item dropdown">
+                <a class="nav-link" href="#" id="configMenu" role="button" aria-expanded="false" onclick="toggleDropdown('configDropdown')">
+                    <i class="fas fa-cog"></i> Configurações
+                </a>
+                <ul class="dropdown-menu" id="configDropdown" aria-labelledby="configMenu">
+                    <li><a class="dropdown-item" href="#">Opção 1</a></li>
+                    <li><a class="dropdown-item" href="#">Opção 2</a></li>
+                    <li><a class="dropdown-item" href="#">Opção 3</a></li>
+                </ul>
+            </div>
+            <div class="nav-item dropdown">
+                <a class="nav-link" href="#" id="reportsMenu" role="button" aria-expanded="false">
+                    <i class="fas fa-file"></i> Relatórios
+                </a>
+            </div>
+            <div class="nav-item dropdown">
+                <a class="nav-link" href="#" id="userMenu" role="button" aria-expanded="false" onclick="toggleDropdown('userDropdown')">
+                    <i class="fas fa-user"></i> Usuário
+                </a>
+                <ul class="dropdown-menu" id="userDropdown" aria-labelledby="userMenu">
+                    <li><a class="dropdown-item" href="/TechPeanut/TechPeanut.Web/perfil.html">Perfil</a></li>
+                    <li><a class="dropdown-item" href="#">Configurações</a></li>
+                    <li><a class="dropdown-item" href="/TechPeanut/TechPeanut.Web/index.html">Sair</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Conteúdo da Página -->
+    <div class="content">
+        <div class="cards-container">
+            <div class="card-user">
+                <div class="user-info">
+                    <img src="/TechPeanut/TechPeanut.Web/src/img/logoUser.jpg" alt="Foto do Usuário" class="user-photo">
+                    <div class="user-details">
+                        <h2 class="user-name">João Cansado Saulo</h2>
+                        <p style="margin-top: -1px;" class="user-role">Gerente de Estoque</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="card-description">Tarefas Concluídas</p>
+                <hr>
+                <div class="card-tasks">
+                    <p><span>Manutenção de Pessoas</span> <span class="task-deadline">9h - 10h30</span></p>
+                    <p><span>Cadastro de Usuarios</span> <span class="task-deadline">10h31 - 11h</span></p>
+                </div>
+            </div>
+        
+            <div class="card-task">
+                <h2 class="card-title"><i class="fas fa-tasks"></i> Tarefas</h2>
+                <hr>
+                <p class="card-description">Tarefas Prioridades do dia</p>
+                <hr>
+                <div class="card-tasks">
+                    <p><span>Compras</span> <span class="task-deadline">Prazo: 28/09/2024</span></p>
+                    <p><span>Alteração de Estoque</span> <span class="task-deadline">Prazo: 30/09/2024</span></p>
+                    <p><span>Lançamento de Notas</span> <span class="task-deadline">Prazo: 01/10/2024</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+<script>
+    function toggleDropdown(dropdownId) {
+        const dropdowns = document.getElementsByClassName("dropdown-menu");
+        for (let i = 0; i < dropdowns.length; i++) {
+            const openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+        const dropdown = document.getElementById(dropdownId);
+        dropdown.classList.toggle('show');
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.nav-link')) {
+            const dropdowns = document.getElementsByClassName("dropdown-menu");
+            for (let i = 0; i < dropdowns.length; i++) {
+                const openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
