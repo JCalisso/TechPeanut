@@ -103,3 +103,27 @@ BEGIN
   WHERE ID_Pessoa = @ID_Pessoa
 END
 GO
+
+IF EXISTS (SELECT 1 FROM dbo.Pessoas WHERE NM_Pessoa = 'SYSADMIN')
+BEGIN
+  DECLARE @ID_Pessoa Integer
+
+  SELECT @ID_Pessoa = ID_Pessoa
+  FROM dbo.Pessoas 
+  WHERE NM_Pessoa = 'SYSADMIN'
+
+  IF (ISNULL(@ID_Pessoa, 0) <> 0) AND 
+     (NOT EXISTS (SELECT 1
+                  FROM dbo.Emails 
+                  WHERE ID_Pessoa = @ID_Pessoa))
+  BEGIN
+    INSERT INTO dbo.Emails (E_Mail
+                           ,SN_Email_Principal
+                           ,ID_Pessoa
+                           ,Senha)
+    VALUES ('sysadmin@sysadmin.com'
+           ,'S'
+           ,@ID_Pessoa
+           ,'Admin123')
+  END
+END
