@@ -147,6 +147,7 @@ BEGIN
                           ,E_Mail             Varchar(100) COLLATE LATIN1_GENERAL_CI_AS NOT NULL
                           ,SN_Email_Principal Char(1)      COLLATE LATIN1_GENERAL_CI_AS NOT NULL
                           ,ID_Pessoa          Integer
+                          ,Senha              Varchar(50)  COLLATE LATIN1_GENERAL_CI_AS NOT NULL
                           ,CONSTRAINT FK_ID_Pessoa FOREIGN KEY (ID_Pessoa) REFERENCES dbo.Pessoas (ID_Pessoa))
 END 
 GO
