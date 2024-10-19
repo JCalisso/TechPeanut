@@ -6,6 +6,18 @@
     <title>TechPeanut - Dashboard</title>
     <link rel="stylesheet" href="./src/styles/stylesheet.css">
 </head>
+
+<style>
+    .panel {
+    background-color: #ffffff; /* Cor de fundo branca */
+    border: 2px solid #26180c; /* Borda cinza clara */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 16px; /* Espaçamento interno */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para dar um efeito elevado */
+}
+
+</style>
+
 <body>
     <nav class="navbar">
         <a class="roboto-bold" href="./listaUsers.html" style="color: white; font-size: 25px;">TechPeanut</a>
@@ -40,26 +52,28 @@
     
 <!-- Conteúdo da Página -->
 <div class="content">
-    <div class="users-cards-container">
-        <div class="users-card">
-            <img src="./src/img/logoUser.jpg" alt="Foto do usuário" class="users-photo">
-            <p class="users-name">João Cansado Saulo</p>
-            <a href="./userView.html"><button class="card-button">Tarefas</button></a>
-            <a href="./perfilView.html"><button class="card-button">Perfil</button></a>
+    <div class="panel">
+        <div class="users-cards-container">
+            <div class="users-card">
+                <img src="./src/img/logoUser.jpg" alt="Foto do usuário" class="users-photo">
+                <p class="users-name">João Cansado Saulo</p>
+                <a href="./userView.html"><button class="card-button">Tarefas</button></a>
+                <a href="./perfilView.html"><button class="card-button">Perfil</button></a>
+            </div>
+            <div class="users-card">
+                <img src="./src/img/RobsonPerfil.jpeg" alt="Foto do usuário" class="users-photo">
+                <p class="users-name">Robson Caetano</p>
+                <a href=""><button class="card-button">Tarefas</button></a>
+                <a href=""><button class="card-button">Perfil</button></a>
+            </div>
+            <div class="users-card">
+                <img src="./src/img/GusttavoUser.webp" alt="Foto do usuário" class="users-photo">
+                <p class="users-name">Gusttavo Lima</p>
+                <a href=""><button class="card-button">Tarefas</button></a>
+                <a href=""><button class="card-button">Perfil</button></a>
+            </div>
         </div>
-        <div class="users-card">
-            <img src="./src/img/RobsonPerfil.jpeg" alt="Foto do usuário" class="users-photo">
-            <p class="users-name">Robson Caetano</p>
-            <a href=""><button class="card-button">Tarefas</button></a>
-            <a href=""><button class="card-button">Perfil</button></a>
-        </div>
-        <div class="users-card">
-            <img src="./src/img/GusttavoUser.webp" alt="Foto do usuário" class="users-photo">
-            <p class="users-name">Gusttavo Lima</p>
-            <a href=""><button class="card-button">Tarefas</button></a>
-            <a href=""><button class="card-button">Perfil</button></a>
-        </div>
-    </div>
+    </div> 
 </div>
 </body>
 </html>
