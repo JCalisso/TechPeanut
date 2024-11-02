@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using TechPeanut.Api.Models.Base;
 
 namespace TechPeanut.Api.Models
@@ -6,9 +7,6 @@ namespace TechPeanut.Api.Models
     [Table("pessoas")]
     public class Pessoas : BaseEntity
     {
-        [Column("ID_Pessoa")]
-        public int Id { get; set; }
-
         [Column("NM_Pessoa")]
         public string NM_Pessoa { get; set;}
 
@@ -23,5 +21,25 @@ namespace TechPeanut.Api.Models
 
         [Column("ST_Genero")]
         public string ST_Genero { get; set; }
+
+        [AllowNull]
+        [Column("ID_Telefone_Principal")]
+        public int? ID_Telefone_Principal { get; set; }
+
+        [AllowNull]
+        [Column("ID_Funcao")]
+        public int? ID_Funcao { get; set; }
+
+        [AllowNull]
+        [Column("ID_Cargo")]
+        public int? ID_Cargo { get; set; }
+
+        [AllowNull]
+        [Column("ID_Endereco")]
+        public int? ID_Endereco { get; set; }
+
+        [AllowNull]
+        [Column("ID_Dados_Bancarios")]
+        public int? ID_Dados_Bancarios { get; set; }
     }
 }

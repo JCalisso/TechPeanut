@@ -126,7 +126,7 @@ GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Pessoas')
 BEGIN
-  CREATE TABLE dbo.Pessoas (ID_Pessoa             Integer Primary Key Identity(1,1)
+  CREATE TABLE dbo.  (ID_Pessoa             Integer Primary Key Identity(1,1)
                            ,NM_Pessoa             Varchar(80)  COLLATE LATIN1_GENERAL_CI_AS NOT NULL
                            ,ST_Tipo_Pessoa        Char(1)      COLLATE LATIN1_GENERAL_CI_AS NOT NULL
                            ,CD_Documento_Pessoa   Varchar(14)  COLLATE LATIN1_GENERAL_CI_AS NOT NULL

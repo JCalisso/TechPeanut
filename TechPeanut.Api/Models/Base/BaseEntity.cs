@@ -8,3 +8,4 @@ namespace TechPeanut.Api.Models.Base
         public int Id { get; set; }
     }
 }
+    

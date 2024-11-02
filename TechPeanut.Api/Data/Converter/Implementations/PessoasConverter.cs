@@ -16,7 +16,12 @@ namespace TechPeanut.Api.Data.Converter.Implementations
                 CD_Documento_Pessoa = origin.CD_Documento_Pessoa,
                 DT_Nascimento = origin.DT_Nascimento,
                 ST_Genero = origin.ST_Genero,
-                ST_Tipo_Pessoa = origin.ST_Tipo_Pessoa
+                ST_Tipo_Pessoa = origin.ST_Tipo_Pessoa,
+                ID_Telefone_Principal = origin.ID_Telefone_Principal,
+                ID_Funcao = origin.ID_Funcao,
+                ID_Cargo = origin.ID_Cargo,
+                ID_Endereco = origin.ID_Endereco,
+                ID_Dados_Bancarios = origin.ID_Dados_Bancarios
             };
         }
 
@@ -30,7 +35,12 @@ namespace TechPeanut.Api.Data.Converter.Implementations
                 CD_Documento_Pessoa = origin.CD_Documento_Pessoa,
                 DT_Nascimento = origin.DT_Nascimento,
                 ST_Genero = origin.ST_Genero,
-                ST_Tipo_Pessoa = origin.ST_Tipo_Pessoa
+                ST_Tipo_Pessoa = origin.ST_Tipo_Pessoa,
+                ID_Telefone_Principal = origin.ID_Telefone_Principal,
+                ID_Funcao = origin.ID_Funcao,
+                ID_Cargo = origin.ID_Cargo,
+                ID_Endereco = origin.ID_Endereco,
+                ID_Dados_Bancarios = origin.ID_Dados_Bancarios
             };
         }
 

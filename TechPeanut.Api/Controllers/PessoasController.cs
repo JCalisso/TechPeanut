@@ -43,7 +43,45 @@ namespace TechPeanut.Api.Controllers
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(int id)
         {
-            return Ok(_pessoaBusiness.FindAll());
+            return Ok(_pessoaBusiness.FindById(id));
+        }
+
+        // Mpas POST requests to http://localhost:{port}/api/person/
+        // [FromBody] consumes the JSON object set in the request body
+        [HttpPost]
+        [ProducesResponseType((200), Type = typeof(PessoasVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Post([FromBody] PessoasVO person)
+        {
+            if (person == null) return BadRequest();
+
+            return Ok(_pessoaBusiness.Create(person));
+        }
+
+        // Mpas PUT requests to https://localhost:{port}/api/person/
+        // [FromBody] consumes the JSON object set in the request body
+        [HttpPut]
+        [ProducesResponseType((200), Type = typeof(PessoasVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Put([FromBody] PessoasVO person)
+        {
+            if (person == null) return BadRequest();
+
+            return Ok(_pessoaBusiness.Update(person));
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        public IActionResult Delete(int id)
+        {
+            _pessoaBusiness.Delete(id);
+            return NoContent();
         }
     }
 }
