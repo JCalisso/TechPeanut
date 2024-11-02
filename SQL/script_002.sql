@@ -26,21 +26,21 @@ GO
 IF NOT EXISTS (SELECT 1 
                FROM dbo.FuncaoPrivilegio 
                     INNER JOIN dbo.Privilegio
-                    ON Privilegio.ID_Privilegio = FuncaoPrivilegio.ID_Privilegio
+                    ON Privilegio.ID = FuncaoPrivilegio.ID_Privilegio
                     INNER JOIN dbo.Funcao 
-                    ON Funcao.ID_Funcao = FuncaoPrivilegio.ID_Funcao
+                    ON Funcao.ID = FuncaoPrivilegio.ID_Funcao
                WHERE CD_Funcao = 'SYSADM')
 BEGIN
   DECLARE @ID_Privilegio Integer
          ,@ID_Funcao     Integer;
 
   SELECT TOP 1
-       @ID_Privilegio = ID_Privilegio
+       @ID_Privilegio = ID
   FROM dbo.Privilegio 
   WHERE CD_Privilegio = 'SYSADM'
 
   SELECT TOP 1
-       @ID_Funcao = ID_Funcao
+       @ID_Funcao = ID
   FROM dbo.Funcao 
   WHERE CD_Funcao = 'ADM'
 
@@ -85,22 +85,22 @@ BEGIN
          ,@ID_Funcao Integer
          ,@ID_Cargo  Integer
 
-  SELECT @ID_Funcao = ID_Funcao
+  SELECT @ID_Funcao = ID
   FROM dbo.Funcao 
   WHERE Funcao.CD_Funcao = 'ADM'
 
-  SELECT @ID_Cargo = ID_Cargo
+  SELECT @ID_Cargo = ID
   FROM dbo.Cargos
   WHERE CD_Cargo = 'SYSADM'
 
-  SELECT @ID_Pessoa = ID_Pessoa
+  SELECT @ID_Pessoa = ID
   FROM dbo.Pessoas 
   WHERE NM_Pessoa = 'SYSADMIN'
 
   UPDATE Pessoas
   SET ID_Funcao = @ID_Funcao
      ,ID_Cargo  = @ID_Cargo
-  WHERE ID_Pessoa = @ID_Pessoa
+  WHERE ID = @ID_Pessoa
 END
 GO
 
@@ -108,7 +108,7 @@ IF EXISTS (SELECT 1 FROM dbo.Pessoas WHERE NM_Pessoa = 'SYSADMIN')
 BEGIN
   DECLARE @ID_Pessoa Integer
 
-  SELECT @ID_Pessoa = ID_Pessoa
+  SELECT @ID_Pessoa = ID
   FROM dbo.Pessoas 
   WHERE NM_Pessoa = 'SYSADMIN'
 
