@@ -27,6 +27,7 @@ namespace TechPeanut.Api.Data.VO
 
         public int? ID_Endereco {  get; set; }   
 
+        public TelefonesVO Telefones { get; set; }
 
         public List<HyperMediaLink> Links { get; set; } = new List<HyperMediaLink>();
     }

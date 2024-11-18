@@ -79,7 +79,6 @@ namespace TechPeanut.Api.Repository.Generic
                     throw;
                 }
             }
-
         }
 
         public bool Exists(int id)

@@ -13,5 +13,7 @@ namespace TechPeanut.Api.Models.Context
         public DbSet<Pessoas> Pessoas { get; set; }
 
         public DbSet<Login> Login { get; set; }
+
+        public DbSet<Telefones> Telefones { get; set; }
     }
 }

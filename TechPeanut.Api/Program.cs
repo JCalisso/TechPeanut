@@ -82,6 +82,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddScoped<IPessoaBusiness, PessoasBusinessImplementation>();
+builder.Services.AddScoped<ITelefoneBusiness, TelefoneBusinessImplementation>();
 builder.Services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));

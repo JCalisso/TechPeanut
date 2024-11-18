@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using TechPeanut.Api.Models.Base;
 
@@ -7,18 +8,23 @@ namespace TechPeanut.Api.Models
     [Table("pessoas")]
     public class Pessoas : BaseEntity
     {
+        [Required]
         [Column("NM_Pessoa")]
         public string NM_Pessoa { get; set;}
 
+        [Required]
         [Column("ST_Tipo_Pessoa")]
         public string ST_Tipo_Pessoa { get; set; }
 
+        [Required]
         [Column("CD_Documento_Pessoa")]
         public string CD_Documento_Pessoa { get; set; }
 
+        [Required]
         [Column("DT_Nascimento")]
         public DateTime DT_Nascimento { get; set; }
 
+        [Required]
         [Column("ST_Genero")]
         public string ST_Genero { get; set; }
 
