@@ -17,21 +17,21 @@
 <div class="login-container">
     <h2 class="roboto-medium" style="margin: 0%;">Login</h2>
     <hr>
-    <form action="login.php" method="POST">
+    <form id="loginForm">
         <h4 style="margin: 0px;">E-mail</h4>
-        <input type="text" name="usuario" placeholder="Usuário" required>
+        <input type="text" id="email" name="usuario" placeholder="E-mail" required>
         <h4 style="margin: 0px;">Senha</h4>
-        <input type="password" name="senha" placeholder="Senha" required>
+        <input type="password" id="senha" name="senha" placeholder="Senha" required>
         <a style="color: #fff; margin-left: 170px; font-size: 12px; margin-top: -10px;" href="#" class="forgot-password">Esqueceu sua senha?</a>
         <br>
         <button type="submit">Entrar</button>
-
+    </form>
+    <div id="error-message" style="color: red; display:none"></div>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
             <a style="color: #492300; font-size: 12px;" href="#" class="forgot-password">Ainda não tem Conta?</a>
             <button style="font-size: 7px; margin-top: 15px; width: 20%; border-radius: 8px;">Cadastre-se</button>
         </div>
-    </form>
 </div>
-
+<script src="./src/script/login.js"></script>
 </body>
 </html>
