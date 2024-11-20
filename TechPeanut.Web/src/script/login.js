@@ -15,7 +15,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
 
   // https://localhost:62635/api/login/v1/valida-login?E_Mail=sysadmin%40sysadmin.com&Senha=Admin123
-  const url = `https://localhost:62635/api/login/v1/valida-login?E_Mail=${encodeURIComponent(username)}&Senha=${encodeURIComponent(password)}`;
+  const url = `https://localhost:7188/api/login/v1/valida-login?E_Mail=${encodeURIComponent(username)}&Senha=${encodeURIComponent(password)}`;
 
   try {
     
@@ -29,16 +29,15 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
       if (!response.ok) {
           // Exibe uma mensagem de erro se a resposta não for OK
-          console.log('deu erro');
           const errorMessage = await response.json();
           document.getElementById('error-message').innerText = errorMessage.message || 'Erro ao tentar fazer login.';
           document.getElementById('error-message').style.display = 'block';
-      } else {
+      } else {  
           // Caso o login seja bem-sucedido, redireciona para a página inicial
           const data = await response.json();
           if (data) {
               // Aqui, você pode armazenar o token em um local apropriado, como localStorage
-              window.location.href = '/home';  // Redireciona para a página inicial
+              window.location.href = './listaUsers.html';  // Redireciona para a página inicial
           }
       }
   } catch (error) {

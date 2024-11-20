@@ -7,7 +7,7 @@ namespace TechPeanut.Api.Business
 
         List<LoginVO> FindAll();
 
-        bool ValidaAcesso(string E_Mail, string Senha);
+        List<LoginVO> ValidaAcesso(string E_Mail, string Senha);
 
     }
 }

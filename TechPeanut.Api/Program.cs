@@ -54,6 +54,7 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(builder =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+
 var filterOptions = new HyperMediaFilterOptions();
 filterOptions.ContentResponseEnricherList.Add(new PessoasEnricher());
 filterOptions.ContentResponseEnricherList.Add(new LoginEnricher());
@@ -91,6 +92,7 @@ builder.Services.AddScoped(typeof(ILoginRepository<>), typeof(LoginRepository<>)
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseCors();
 
 app.UseHttpsRedirection();
 
@@ -103,8 +105,6 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
     endpoints.MapControllerRoute("DefaultApi", "{controller=values}/{id?}");
 });
-
-app.UseCors();
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using TechPeanut.Api.Models.Base;
 using TechPeanut.Api.Models.Context;
@@ -27,9 +28,13 @@ namespace TechPeanut.Api.Repository.Login
         }
 
 
-        public bool ValidaAcesso(string E_Mail, string Senha)
+        public List<T> ValidaAcesso(string E_Mail, string Senha)
         {
-            return dataset.Any(param => param.E_Mail.Equals(E_Mail) && param.Senha.Equals(Senha));
+            var Email = (List<T>)dataset.Where(param => param.E_Mail == E_Mail && param.Senha == Senha).ToList();
+
+            return Email;
+            //Any(param => param.E_Mail.Equals(E_Mail) && param.Senha.Equals(Senha));
+            // !string.IsNullOrEmpty(p.Nome)
         }
     }
 }

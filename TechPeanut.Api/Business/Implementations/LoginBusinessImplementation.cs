@@ -24,9 +24,9 @@ namespace TechPeanut.Api.Business.Implementations
             return _converter.Parse(_repository.FindAll());
         }
 
-        public bool ValidaAcesso(string E_Mail, string Senha)
+        public List<LoginVO> ValidaAcesso(string E_Mail, string Senha)
         {
-            return _repository.ValidaAcesso(E_Mail, Senha);
+            return _converter.Parse(_repository.ValidaAcesso(E_Mail, Senha));
         }
 
     }

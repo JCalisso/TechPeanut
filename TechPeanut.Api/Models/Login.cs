@@ -7,7 +7,7 @@ namespace TechPeanut.Api.Models
     [Table("Emails")]
     public class Login : LoginEntity
     {
-        [Column("ID_Email")]
+        [Column("Id")]
         public int Id { get; set; }
 
         [Column("E_Mail")]
