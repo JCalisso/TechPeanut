@@ -7,6 +7,12 @@ GO
 USE TechPeanut_dev
 GO
 
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Glossario_Tabelas')
+BEGIN
+  CREATE TABLE dbo.Glossario_Tabelas (Nome      Varchar(30)  NOT NULL
+                                     ,Descricao Varchar(255) NOT NULL)
+END
+
 
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Privilegio')
 BEGIN
@@ -115,11 +121,11 @@ GO
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Telefones')
 BEGIN
   CREATE TABLE dbo.Telefones (ID               Integer Primary Key Identity(1,1)
-                             ,Telefone         Varchar(100) COLLATE LATIN1_GENERAL_CI_AS NOT NULL
-                             ,ST_Tipo_Telefone Char(2)      COLLATE LATIN1_GENERAL_CI_AS NOT NULL
-                             ,ID_Cidade        Integer                                   NOT NULL
-                             ,ID_Pessoa        Integer                                   NOT NULL
-                             ,CONSTRAINT FK_ID_Cidade FOREIGN KEY (ID_Cidade) REFERENCES dbo.Cidades (ID))
+                             ,Telefone         Varchar(11) COLLATE LATIN1_GENERAL_CI_AS NOT NULL
+                             ,ST_Tipo_Telefone Char(2)     COLLATE LATIN1_GENERAL_CI_AS NOT NULL
+                             ,SN_Principal     Char(1)     COLLATE LATIN1_GENERAL_CI_AS NOT NULL
+                             ,ID_Pessoa        Integer                                  NOT NULL
+                             ,CONSTRAINT FK_ID_Pessoa_Telefone FOREIGN KEY (ID_Pessoa) REFERENCES dbo.Pessoas (ID))
 END 
 GO
 
@@ -152,3 +158,5 @@ BEGIN
 END 
 GO
 
+
+--drop table telefones

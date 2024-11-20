@@ -127,3 +127,12 @@ BEGIN
            ,'Admin123')
   END
 END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.Telefones)
+BEGIN
+  INSERT INTO dbo.Telefones (Telefone
+                            ,ST_Tipo_Telefone
+                            ,SN_Principal
+                            ,ID_Pessoa)
+  VALUES ('14999999999', 'C', 'S',1)
+END
