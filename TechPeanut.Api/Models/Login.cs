@@ -16,5 +16,7 @@ namespace TechPeanut.Api.Models
         [Column("Senha")]
         public string Senha { get; set; }
 
+        [Column("ID_Pessoa")]
+        public int ID_Pessoa { get; set; }
     }
 }

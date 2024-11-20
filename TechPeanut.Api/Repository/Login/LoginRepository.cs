@@ -30,11 +30,9 @@ namespace TechPeanut.Api.Repository.Login
 
         public List<T> ValidaAcesso(string E_Mail, string Senha)
         {
-            var Email = (List<T>)dataset.Where(param => param.E_Mail == E_Mail && param.Senha == Senha).ToList();
+            var Email = dataset.Where(param => param.E_Mail == E_Mail && param.Senha == Senha).ToList();
 
             return Email;
-            //Any(param => param.E_Mail.Equals(E_Mail) && param.Senha.Equals(Senha));
-            // !string.IsNullOrEmpty(p.Nome)
         }
     }
 }

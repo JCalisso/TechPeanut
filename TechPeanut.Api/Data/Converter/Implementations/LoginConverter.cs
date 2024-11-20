@@ -13,7 +13,8 @@ namespace TechPeanut.Api.Data.Converter.Implementations
             {
                 Id = origin.Id,
                 E_Mail = origin.E_Mail,
-                Senha = origin.Senha
+                Senha = origin.Senha,
+                ID_Pessoa = origin.ID_Pessoa
             };
         }
 
@@ -24,7 +25,8 @@ namespace TechPeanut.Api.Data.Converter.Implementations
             {
                 Id = origin.Id,
                 E_Mail = origin.E_Mail,
-                Senha = origin.Senha
+                Senha = origin.Senha,
+                ID_Pessoa = origin.ID_Pessoa
             };
         }
 

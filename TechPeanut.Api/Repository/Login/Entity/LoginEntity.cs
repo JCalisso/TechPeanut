@@ -9,5 +9,8 @@ namespace TechPeanut.Api.Repository.Login.Entity
 
         [Column("Senha")]
         public string Senha { get; set; }
+
+        [Column("ID_Pessoa")]
+        public int ID_Pessoa { get; set; }
     }
 }
