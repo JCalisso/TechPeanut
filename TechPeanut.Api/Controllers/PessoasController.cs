@@ -46,18 +46,16 @@ namespace TechPeanut.Api.Controllers
             return Ok(_pessoaBusiness.FindById(id));
         }
 
-        // Mpas POST requests to http://localhost:{port}/api/person/
-        // [FromBody] consumes the JSON object set in the request body
         [HttpPost]
         [ProducesResponseType((200), Type = typeof(PessoasVO))]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult Post([FromBody] PessoasVO person)
+        public IActionResult Post([FromBody] PessoasVO pessoas)
         {
-            if (person == null) return BadRequest();
+            if (pessoas == null) return BadRequest();
 
-            return Ok(_pessoaBusiness.Create(person));
+            return Ok(_pessoaBusiness.Create(pessoas));
         }
 
         // Mpas PUT requests to https://localhost:{port}/api/person/
@@ -67,11 +65,11 @@ namespace TechPeanut.Api.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult Put([FromBody] PessoasVO person)
+        public IActionResult Put([FromBody] PessoasVO pessoas)
         {
-            if (person == null) return BadRequest();
+            if (pessoas == null) return BadRequest();
 
-            return Ok(_pessoaBusiness.Update(person));
+            return Ok(_pessoaBusiness.Update(pessoas));
         }
 
         [HttpDelete("{id}")]
