@@ -8,11 +8,11 @@
         body {
             font-family: "Roboto", sans-serif;
             background-color: #80644b;
-            display: flex;
+            /* display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; */
             height: 100vh;
-            margin: 0;
+            margin-top: 80px;
             flex-direction: column;
         }
         .login-container {
@@ -503,3 +503,14 @@
         font-size: 14px; /* Tamanho da fonte */
         color: #333; /* Cor do texto */
     }
+
+    .card-button:disabled {
+        background-color: #dbd9d9; /* Cor de fundo mais escura para indicar desabilitado */
+        color: #000; /* Cor do texto mais clara */
+        cursor: not-allowed; /* O cursor muda para indicar que o botão não pode ser clicado */
+    }
+
+    /* a.btn {
+        pointer-events: auto; 
+        z-index: 1;         
+    } */

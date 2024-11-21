@@ -21,7 +21,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand roboto-bold" href="./listaUsers.html" style="font-size: 25px;">TechPeanut</a>
+            <a class="navbar-brand roboto-bold" href="" style="font-size: 25px;">TechPeanut</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -61,42 +61,36 @@
     </nav>
 
     <!-- Conteúdo Principal -->
-    <div class="container">
+    <div class="container-md">
+      <div style="padding: 10px;background-color: white;border-radius: 10px;">
+        <h2>Cadastrando Nova Pessoa</h2>
+        <hr>
+        <div class="row">
+          <div class="col-md-2">
+              <a href="./listaUsers.html" class="btn btn-outline-secondary" >
+                  Voltar <span class="fa fa-reply" style="margin-left: 5px;"></span>
+              </a>
+          </div>
+      </div>
+      </div>
+    </div> 
+
+    <div class="container-md" style="margin-top: 15px;">
         <div style="padding: 10px;background-color: white;border-radius: 10px;">
-            <div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <a href="./addPessoa.html" class="btn btn-outline-secondary" style="font-size: 18px; display: flex; align-items: center; text-decoration: none;">
-                            Adicionar <span class="fa fa-plus" style="margin-left: 5px;"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>            
-            <div>
-                <div id="cards-container" class="users-cards-container d-flex flex-wrap mt-3">
-                    <!-- Card de Usuário -->
-                    <div style="width: 250px;" class="users-card text-center">
-                        <img src="./src/img/logoUser.jpg" alt="Foto do usuário João Cansado Saulo" class="users-photo">
-                        <p class="users-name">João Cansado Saulo</p>
-                        <a href="./userView.html"><button  disabled class="card-button">Tarefas</button></a>
-                        <a href="./perfilView.html"><button   class="card-button">Perfil</button></a>
-                    </div>
-                    <!-- Outro Card -->
-                    <div  style="width: 250px;" class="users-card text-center">
-                        <img src="./src/img/RobsonPerfil.jpeg" alt="Foto do usuário Robson Caetano" class="users-photo">
-                        <p class="users-name">Robson Caetano</p>
-                        <a href=""><button  disabled class="card-button">Tarefas</button></a>
-                        <a href=""><button   class="card-button">Perfil</button></a>
-                    </div>
-                    <!-- Outro Card -->
-                    <div  style="width: 250px;" class="users-card text-center">
-                        <img src="./src/img/GusttavoUser.webp" alt="Foto do usuário Gusttavo Lima" class="users-photo">
-                        <p class="users-name">Gusttavo Lima</p>
-                        <a href=""><button disabled class="card-button">Tarefas</button></a>
-                        <a href=""><button  class="card-button">Perfil</button></a>
-                    </div>
+          <form id="PessoaForm">
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label for="nome" class="form-label"><b>Nome</b></label>
+                    <input 
+                        type="text" 
+                        id="nome" 
+                        name="nome" 
+                        class="form-control" 
+                        required 
+                        placeholder="Digite o nome">
                 </div>
             </div>
+          </form>        
         </div> 
     </div>
 
@@ -105,6 +99,6 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
             crossorigin="anonymous">
     </script>
-    <script src="./src/script/listaUsers.js"></script>
+    <!-- <script src="./src/script/listaUsers.js"></script> -->
 </body>
 </html>
