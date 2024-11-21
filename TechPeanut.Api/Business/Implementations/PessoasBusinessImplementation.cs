@@ -27,7 +27,6 @@ namespace TechPeanut.Api.Business.Implementations
             return _converter.Parse(_repository.FindById(id));
         }
 
-
         public PessoasVO Create(PessoasVO pessoas)
         {
             var pessoasEntity = _converter.Parse(pessoas);

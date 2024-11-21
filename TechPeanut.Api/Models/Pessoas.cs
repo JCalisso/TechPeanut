@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using TechPeanut.Api.Data.VO;
 using TechPeanut.Api.Models.Base;
 
 namespace TechPeanut.Api.Models
@@ -47,5 +48,6 @@ namespace TechPeanut.Api.Models
         [AllowNull]
         [Column("ID_Dados_Bancarios")]
         public int? ID_Dados_Bancarios { get; set; }
+
     }
 }

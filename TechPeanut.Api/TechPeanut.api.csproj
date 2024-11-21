@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repository\Pessoas\**" />
+    <Content Remove="Repository\Pessoas\**" />
+    <EmbeddedResource Remove="Repository\Pessoas\**" />
+    <None Remove="Repository\Pessoas\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Controllers\WeatherForecastController.cs" />
     <Compile Remove="WeatherForecast.cs" />
   </ItemGroup>

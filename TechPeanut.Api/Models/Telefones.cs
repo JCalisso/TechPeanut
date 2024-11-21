@@ -18,6 +18,6 @@ namespace TechPeanut.Api.Models
 
         [Column("SN_Principal")]
         public string SN_Principal { get; set; }
-       
+
     }
 }

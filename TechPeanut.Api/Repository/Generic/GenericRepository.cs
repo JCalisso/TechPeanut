@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using TechPeanut.Api.Models.Base;
 using TechPeanut.Api.Models.Context;
 
@@ -85,5 +86,6 @@ namespace TechPeanut.Api.Repository.Generic
         {
             return dataset.Any(param => param.Id.Equals(id));
         }
+
     }
 }

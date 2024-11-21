@@ -1,4 +1,6 @@
-﻿using TechPeanut.Api.Models.Base;
+﻿using System.Linq.Expressions;
+using TechPeanut.Api.Models;
+using TechPeanut.Api.Models.Base;
 
 namespace TechPeanut.Api.Repository.Generic
 {
@@ -15,6 +17,5 @@ namespace TechPeanut.Api.Repository.Generic
         void Delete(int id);
 
         bool Exists(int id);
-
     }
 }
