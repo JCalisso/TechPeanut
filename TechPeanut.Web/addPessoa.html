@@ -16,6 +16,7 @@
 
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -66,18 +67,21 @@
         <h2>Cadastrando Nova Pessoa</h2>
         <hr>
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-11">
               <a href="./listaUsers.html" class="btn btn-outline-secondary" >
-                  Voltar <span class="fa fa-reply" style="margin-left: 5px;"></span>
+                  Voltar <span class="fa fa-rep ly" style="margin-left: 5px;"></span>
               </a>
           </div>
+          <div class="col">
+            <button type="button" class="btn btn-dark" id="btnGravaPessoa">Gravar</button>
+        </div>  
       </div>
       </div>
     </div> 
 
     <div class="container-md" style="margin-top: 15px;">
         <div style="padding: 10px;background-color: white;border-radius: 10px;">
-        <form id="PessoaForm">
+        <form id="PessoaForm" onsubmit="return cadastrarPessoa(event)">
             <div class="row mb-3">
                 <div class="col-md-5">
                     <label for="nome" class="form-label"><b>Nome</b></label>
@@ -90,31 +94,33 @@
                         placeholder="Digite o nome">
                 </div>
                 <div class="col-md-3">
-                    <label for="tipo" class="form-label"><b>Tipo de Pessoa</b></label>
+                    <label for="tipo_pessoa" class="form-label"><b>Tipo de Pessoa</b></label>
                     <select 
-                        id="tipo" 
-                        name="tipo" 
+                        id="tipo_pessoa" 
+                        name="tipo_pessoa" 
                         class="form-control" 
+                        oninput="toggleInput()"
                         required>
                         <option value="" disabled selected>Selecione o Tipo</option>
                         <option value="F">Física</option>
-                        <option value="Juridica">Jurídica</option>
+                        <option value="J">Jurídica</option>
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label for="cpf" class="form-label"><b>CPF</b></label>
+                    <label for="documento" class="form-label"><b>CPF/CNPJ</b></label>
                     <input 
                         type="text" 
-                        id="cpf" 
-                        name="cpf" 
+                        id="documento" 
+                        name="documento" 
                         class="form-control" 
-                        placeholder="Digite o CPF" 
+                        disabled
+                        placeholder="Digite o CPF/CNPJ" 
                         required 
                         maxlength="14" 
-                        oninput="this.value = this.value.replace(/[^0-9.-]/g, '').replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4').substring(0, 14)">
+                        oninput="formatarDocumento()">
                 </div>        
             </div>
-
+            <!-- genero e data de nascimento -->
             <div class="row">
                 <div class="col-md-3">
                     <label for="genero" class="form-label"><b>Gênero</b></label>
@@ -134,15 +140,45 @@
                         type="text" 
                         id="data_nascimento" 
                         name="data_nascimento" 
+                        required
                         class="form-control datepicker" 
                         autocomplete="off" 
                         minlength="10" 
                         placeholder="Nascimento"
                         maxlength="10" 
                         onkeypress="formatar(this, '##/##/####')">
-                </div>   
+                </div> 
             </div>
         </form>  
+
+        <form id="TelefoneForm"> 
+            <hr>
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-md-3">
+                    <label for="celular" class="form-label"><b>Telefone</b></label>
+                    <input 
+                        type="text" 
+                        id="celular" 
+                        name="celular" 
+                        class="form-control" 
+                        placeholder="(99) 99999-9999" 
+                        required 
+                        maxlength="15" 
+                        oninput="mascaraCelular(this)">
+                </div>  
+                <div class="col-md-3">
+                    <label for="tipo" class="form-label"><b>Tipo Telefone</b></label>
+                    <select 
+                        id="tipo" 
+                        name="tipo" 
+                        class="form-control" 
+                        required>
+                        <option value="C">Celular</option>
+                        <option value="T">Telefone</option>
+                    </select>
+                </div>          
+            </div>
+        </form> 
 
         <form id="EnderecoForm"> 
             <hr>
@@ -214,46 +250,6 @@
                 </div>
             </div>
         </form>
-
-        <form id="TelefoneForm"> 
-            <hr>
-            <div class="row" style="margin-top: 15px;">
-                <div class="col-md-3">
-                    <label for="celular" class="form-label"><b>Telefone Celular</b></label>
-                    <input 
-                        type="text" 
-                        id="celular" 
-                        name="celular" 
-                        class="form-control" 
-                        placeholder="(99) 99999-9999" 
-                        required 
-                        maxlength="15" 
-                        oninput="mascaraCelular(this)">
-                </div>  
-                <div class="col-md-3">
-                    <label for="tipo" class="form-label"><b>Tipo Telefone</b></label>
-                    <select 
-                        id="tipo" 
-                        name="tipo" 
-                        class="form-control" 
-                        required>
-                        <option value="C">Celular</option>
-                    </select>
-                </div>   
-                <div class="col-md-6">
-                    <label for="cidade" class="form-label"><b>Cidade</b></label>
-                    <input 
-                        type="text" 
-                        id="cidade" 
-                        name="cidade" 
-                        class="form-control" 
-                        placeholder="Digite o nome da cidade" 
-                        maxlength="100" 
-                        required 
-                        oninput="this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s'-]/g, '')">
-                </div>             
-            </div>
-        </form> 
     </div>
 
     <!-- Scripts -->
@@ -290,8 +286,51 @@
         valor = valor.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona o traço
         input.value = valor.substring(0, 15); // Limita ao tamanho máximo
     }
+
+    function formatarDocumento() {
+        const input = document.getElementById('documento');
+        const documento = input.value;
+        
+        // Usa a função de formatação
+        const documentoFormatado = formatarCpfCnpj(documento);
+
+        // Atualiza o valor do campo com a formatação
+        input.value = documentoFormatado;
+    }
+
+    function formatarCpfCnpj(documento) {
+        const tipo = document.getElementById('tipo_pessoa').value;
+        const numero = documento.replace(/\D/g, '');
+
+        // Formatar CPF
+        if ((tipo == "F")) {
+            return numero.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+        }
+
+        // Formatar CNPJ
+        if ((tipo == "J")) {
+            return numero.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+        }
+
+        // Retorna o número original
+        return documento;
+    }
+    function toggleInput() {
+        const selectElement = document.getElementById('tipo_pessoa');
+        const inputElement = document.getElementById('documento');
+
+        // Se nenhuma opção foi selecionada (valor vazio), desabilita o input
+        if (selectElement.value === '') {
+            inputElement.disabled = true;
+        } else {
+        // Caso contrário, habilita o input
+            inputElement.disabled = false;
+        }
+    }
+
 </script>
 
+<script src="./src/script/Pessoas/addPessoa.js"></script>
     <!-- <script src="./src/script/listaUsers.js"></script> -->
 </body>
 </html>

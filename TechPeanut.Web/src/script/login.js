@@ -12,9 +12,6 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
       return;
   }
 
-
-
-  // https://localhost:62635/api/login/v1/valida-login?E_Mail=sysadmin%40sysadmin.com&Senha=Admin123
   const url = `https://localhost:7188/api/login/v1/valida-login?E_Mail=${encodeURIComponent(username)}&Senha=${encodeURIComponent(password)}`;
 
   try {
