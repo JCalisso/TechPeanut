@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
     } catch (error) {
       // Caso ocorra algum erro na requisição (ex: falha de rede)
-        document.getElementById('error-message').innerText = 'Erro ao conectar ao servidor.';
+        document.getElementById('error-message').innerText = 'Erro ao conectar ao servidor.(Pessoa)';
         document.getElementById('error-message').style.display = 'block';
     }
 
@@ -70,18 +70,27 @@ document.addEventListener('DOMContentLoaded', async function () {
             document.getElementById('endereco_bairro').value = data.bairro || '';
             document.getElementById('endereco_cep').value = data.cep || '';
             document.getElementById('observacoes').value = data.observacao || '';
-          // document.getElementById('celular').value = data.celular || '';
-          // document.getElementById('tipoTelefone').value = data.cidade || '';
-          // document.getElementById('cidade').value = data.cidade || '';
         }
     } catch (error) {
       // Caso ocorra algum erro na requisição (ex: falha de rede)
-        document.getElementById('error-message').innerText = 'Erro ao conectar ao servidor.';
+        document.getElementById('error-message').innerText = 'Erro ao conectar ao servidor. Endereço';
         document.getElementById('error-message').style.display = 'block';
     }
 
-      //============================TELEFONE========================================
-    const TelefoneUrl = `https://localhost:62635/api/telefones/v1/${idPessoa}`;
+    //============================TELEFONE========================================
+      const urlPessoa = `https://localhost:62635/api/pessoas/v1/${idPessoa}`
+      // Fazendo a requisição GET para a API
+      const responsePessoa = await fetch(urlPessoa, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      });
+  
+      const dataPessoa = await responsePessoa.json();
+      const idTelefonePessoa = dataPessoa.iD_Telefone_Principal;
+    
+      const TelefoneUrl = `https://localhost:62635/api/telefones/v1/${idTelefonePessoa}`;
 
     try {
       // Fazendo a requisição GET para a API
@@ -100,38 +109,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         } else {
           // Caso a resposta seja bem-sucedida
             const data = await response.json();
-
-          // Preenchendo os campos do formulário
-            document.getElementById('celular').value = data.telefone || '';
-            document.getElementById('tipoTelefone').value = data.sT_Tipo_Telefone || '';
-        }
-    } catch (error) {
-      // Caso ocorra algum erro na requisição (ex: falha de rede)
-        document.getElementById('error-message').innerText = 'Erro ao conectar ao servidor.(Telefone)';
-        document.getElementById('error-message').style.display = 'block';
-    }
-
-          //============================TELEFONE========================================
-    const CidadeUrl = `https://localhost:62635/api/telefones/v1/${idPessoa}`;
-
-    try {
-      // Fazendo a requisição GET para a API
-        const response = await fetch(TelefoneUrl, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if (!response.ok) {
-          // Exibe uma mensagem de erro se a resposta não for OK
-            const errorMessage = await response.json();
-            document.getElementById('error-message').innerText = errorMessage.message || 'Erro ao buscar dados.';
-            document.getElementById('error-message').style.display = 'block';
-        } else {
-          // Caso a resposta seja bem-sucedida
-            const data = await response.json();
-
+          console.log(data)
           // Preenchendo os campos do formulário
             document.getElementById('celular').value = data.telefone || '';
             document.getElementById('tipoTelefone').value = data.sT_Tipo_Telefone || '';

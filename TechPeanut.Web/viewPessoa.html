@@ -232,6 +232,7 @@
                         class="form-control" 
                         placeholder="(99) 99999-9999" 
                         required 
+                        disabled
                         maxlength="15" 
                         oninput="mascaraCelular(this)">
                 </div>  
@@ -241,22 +242,11 @@
                         id="tipoTelefone" 
                         name="tipo" 
                         class="form-control" 
+                        disabled
                         required>
-                        <option value="C">Celular</option>
+                        <option value="C ">Celular</option>
                     </select>
                 </div>   
-                <div class="col-md-6">
-                    <label for="cidade" class="form-label"><b>Cidade</b></label>
-                    <input 
-                        type="text" 
-                        id="cidade" 
-                        name="cidade" 
-                        class="form-control" 
-                        placeholder="Digite o nome da cidade" 
-                        maxlength="100" 
-                        required 
-                        oninput="this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s'-]/g, '')">
-                </div>  
             </div>
         </form> 
     </div>
