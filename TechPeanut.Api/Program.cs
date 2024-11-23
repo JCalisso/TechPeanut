@@ -86,6 +86,8 @@ builder.Services.AddScoped<IPessoaBusiness, PessoasBusinessImplementation>();
 builder.Services.AddScoped<ITelefoneBusiness, TelefoneBusinessImplementation>();
 builder.Services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
 builder.Services.AddScoped<IEnderecosBusiness, EnderecoBusinessImplementation>();
+builder.Services.AddScoped<ICargosBusiness, CargosBusinessImplementation>();
+builder.Services.AddScoped<IFuncaoBusiness, FuncaoBusinessImplementation>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(ILoginRepository<>), typeof(LoginRepository<>));

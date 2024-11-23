@@ -17,5 +17,9 @@ namespace TechPeanut.Api.Models.Context
         public DbSet<Telefones> Telefones { get; set; }
 
         public DbSet<Enderecos> Enderecos { get; set; }
+
+        public DbSet<Cargos> Cargos { get; set; }
+
+        public DbSet<Funcao> Funcao { get; set; }
     }
 }
