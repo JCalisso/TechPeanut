@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async function(event) {
-  const url = `https://localhost:62635/api/pessoas/v1`;
+  const url = `https://localhost:7188/api/pessoas/v1`;
 
   try {
       // Fazendo a requisição GET para a API

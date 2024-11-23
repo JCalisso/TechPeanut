@@ -17,6 +17,14 @@
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+        .aviso {
+          color: red;
+          font-weight: bold;
+          display: none;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -34,9 +42,7 @@
                             <i class="fas fa-cog"></i> Configurações
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="configMenu">
-                            <li><a class="dropdown-item" href="#">Opção 1</a></li>
-                            <li><a class="dropdown-item" href="#">Opção 2</a></li>
-                            <li><a class="dropdown-item" href="#">Opção 3</a></li>
+                            <li><a class="dropdown-item" href="addConfigPrivilegios.html">Cad. Privilégios</a></li>
                         </ul>
                     </li>
                     <!-- Relatórios -->
@@ -72,9 +78,6 @@
                   Voltar <span class="fa fa-rep ly" style="margin-left: 5px;"></span>
               </a>
           </div>
-          <div class="col">
-            <button type="button" class="btn btn-dark" id="btnGravaPessoa">Gravar</button>
-        </div>  
       </div>
       </div>
     </div> 
@@ -146,8 +149,27 @@
                         minlength="10" 
                         placeholder="Nascimento"
                         maxlength="10" 
-                        onkeypress="formatar(this, '##/##/####')">
+                        onkeypress="formatarData(event)">
+                    <span class="aviso" id="avisoNascimento">Por favor, preencha uma data válida.</span>
                 </div> 
+                <div class="col-md-3">
+                    <label for="cargo" class="form-label"><b>Cargo</b></label>
+                    <select 
+                        id="cargo" 
+                        name="cargo" 
+                        class="form-control">
+                        <option value="" disabled selected>Selecione a Cargo</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="funcao" class="form-label"><b>Função</b></label>
+                    <select 
+                        id="funcao" 
+                        name="funcao" 
+                        class="form-control">
+                        <option value="" disabled selected>Selecione a Função</option>
+                    </select>
+                </div>
             </div>
         </form>  
 
@@ -239,17 +261,27 @@
                 <!-- Observações -->
                 <div class="col-md-12">
                     <label for="observacoes" class="form-label"><b>Observações</b></label>
-                    <textarea 
+                    <textarea
                         id="observacoes" 
                         name="observacoes" 
                         class="form-control" 
                         placeholder="Digite observações (opcional)" 
-                        maxlength="500" 
-                        rows="3">
-                    </textarea>
+                        maxlength="500"
+                        rows="3"></textarea>
                 </div>
             </div>
         </form>
+        <div class="row" style="margin-top: 15px;">
+            <div class="row justify-content-md-center">
+                <div class="col"></div>
+                <div class="col-md-auto">
+                    <button type="button" class="btn btn-dark" id="btnGravaPessoa">Gravar</button>
+                </div>
+                <div class="col col-lg-1">
+                    <button type="button" class="btn btn-light" id="btnCancelar">Cancelar</button>
+                </div>  
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
@@ -258,79 +290,124 @@
             crossorigin="anonymous">
     </script>
     <!-- jQuery UI CSS -->
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
-<!-- jQuery e jQuery UI -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <!-- jQuery e jQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $("#data_nascimento").datepicker({
-            dateFormat: 'dd/mm/yy', // Formato da data
-            changeMonth: true, // Permite escolher o mês
-            changeYear: true, // Permite alterar o ano
-            yearRange: '1920:2024', // Intervalo de anos disponíveis (exemplo: 1920 até 2024)
-            minDate: new Date(1920, 0, 1), // Data mínima
-            maxDate: new Date(2024, 11, 31), // Data máxima
-            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
-            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+    <script>
+        $(document).ready(function () {
+            $("#data_nascimento").datepicker({
+                dateFormat: 'dd/mm/yy', // Formato da data
+                changeMonth: true, // Permite escolher o mês
+                changeYear: true, // Permite alterar o ano
+                yearRange: '1920:2024', // Intervalo de anos disponíveis (exemplo: 1920 até 2024)
+                minDate: new Date(1920, 0, 1), // Data mínima
+                maxDate: new Date(2024, 11, 31), // Data máxima
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+            });
         });
-    });
-    function mascaraCelular(input) {
-        let valor = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-        valor = valor.replace(/^(\d{2})(\d)/g, '($1) $2'); // Adiciona parênteses e espaço
-        valor = valor.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona o traço
-        input.value = valor.substring(0, 15); // Limita ao tamanho máximo
-    }
 
-    function formatarDocumento() {
-        const input = document.getElementById('documento');
-        const documento = input.value;
+        function formatarData(event) {
+            let valor = event.target.value;
+
+            // Remove qualquer coisa que não seja um número
+            valor = valor.replace(/\D/g, "");
+
+            // Aplica a formatação de data (DD/MM/YYYY)
+            if (valor.length <= 2) {
+                valor = valor.replace(/(\d{2})/, "$1");
+            } else if (valor.length <= 4) {
+                valor = valor.replace(/(\d{2})(\d{2})/, "$1/$2");
+            } else if (valor.length <= 8) {
+                valor = valor.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3");
+            }
+
+            // Atualiza o valor do input com a data formatada
+            event.target.value = valor;
+        }
+
+        function mascaraCelular(input) {
+            let valor = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            valor = valor.replace(/^(\d{2})(\d)/g, '($1) $2'); // Adiciona parênteses e espaço
+            valor = valor.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona o traço
+            input.value = valor.substring(0, 15); // Limita ao tamanho máximo
+        }
+
+        function formatarDocumento() {
+            const input = document.getElementById('documento');
+            const documento = input.value;
+            
+            // Usa a função de formatação
+            const documentoFormatado = formatarCpfCnpj(documento);
+
+            // Atualiza o valor do campo com a formatação
+            input.value = documentoFormatado;
+        }
+
+        function formatarCpfCnpj(documento) {
+
+            const tipo = document.getElementById('tipo_pessoa').value;
+            const numero = documento.replace(/\D/g, '');
+
+            // Formatar CPF
+            if ((tipo == "F")) {
+                return numero.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+            }
+
+            // Formatar CNPJ
+            if ((tipo == "J")) {
+                return numero.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+            }
+
+            // Retorna o número original
+            return documento;
+        }
         
-        // Usa a função de formatação
-        const documentoFormatado = formatarCpfCnpj(documento);
+        function toggleInput() {
+            const selectElement = document.getElementById('tipo_pessoa');
+            const inputElement = document.getElementById('documento');
 
-        // Atualiza o valor do campo com a formatação
-        input.value = documentoFormatado;
-    }
-
-    function formatarCpfCnpj(documento) {
-        const tipo = document.getElementById('tipo_pessoa').value;
-        const numero = documento.replace(/\D/g, '');
-
-        // Formatar CPF
-        if ((tipo == "F")) {
-            return numero.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+            // Se nenhuma opção foi selecionada (valor vazio), desabilita o input
+            if (selectElement.value === '') {
+                inputElement.disabled = true;
+            } else {
+            // Caso contrário, habilita o input
+                inputElement.disabled = false;
+            }
         }
 
-        // Formatar CNPJ
-        if ((tipo == "J")) {
-            return numero.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
-        }
+    </script>
+    <script src="./src/script/Pessoas/addPessoa.js"></script>
+    <script>
+        window.onload = preencherDropdowns();
+    </script>
+    <script>
+        
+        // Função para verificar o formulário
+        document.getElementById('data_nascimento').addEventListener('click', function(event) {
+        let valido = true;
 
-        // Retorna o número original
-        return documento;
-    }
-    function toggleInput() {
-        const selectElement = document.getElementById('tipo_pessoa');
-        const inputElement = document.getElementById('documento');
-
-        // Se nenhuma opção foi selecionada (valor vazio), desabilita o input
-        if (selectElement.value === '') {
-            inputElement.disabled = true;
+        // Verifica se o campo e-mail está vazio ou inválido
+        const dataNascimento = document.getElementById('data_nascimento').value;
+        const avisoNascimento = document.getElementById('avisoNascimento');
+        if (email.trim() === "" || !email.includes('@')) {
+            avisoNascimento.style.display = 'inline';
+            valido = false;
         } else {
-        // Caso contrário, habilita o input
-            inputElement.disabled = false;
+            avisoNascimento.style.display = 'none';
         }
-    }
 
-</script>
-
-<script src="./src/script/Pessoas/addPessoa.js"></script>
-    <!-- <script src="./src/script/listaUsers.js"></script> -->
+        // Se algum campo estiver inválido, evita o envio do formulário
+        if (!valido) {
+            event.preventDefault();
+        }
+        });
+    </script>
 </body>
 </html>
