@@ -18,13 +18,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <style>
-        .aviso {
-          color: red;
-          font-weight: bold;
-          display: none;
+    <script>
+        function validarCEP() {
+            // Pega o valor digitado no campo de CEP
+            var cep = document.getElementById('endereco_cep');
+
+            // Expressão regular para validar o formato do CEP (XXXXX-XXX)
+            var regexCep = /^[0-9]{5}-[0-9]{3}$/;
+            const alerta = document.getElementById('alerta-cep');
+
+            // Verifica se o CEP corresponde ao padrão
+            if (!regexCep.test(cep.value)) {
+                alert('CEP inválido!');
+                cep.focus();
+            } 
         }
-    </style>
+    </script>
 </head>
 <body>
     <!-- Navbar -->
@@ -150,7 +159,7 @@
                         placeholder="Nascimento"
                         maxlength="10" 
                         onkeypress="formatarData(event)">
-                    <span class="aviso" id="avisoNascimento">Por favor, preencha uma data válida.</span>
+                        <!-- <p id="mensagem"></p> -->
                 </div> 
                 <div class="col-md-3">
                     <label for="cargo" class="form-label"><b>Cargo</b></label>
@@ -158,7 +167,7 @@
                         id="cargo" 
                         name="cargo" 
                         class="form-control">
-                        <option value="" disabled selected>Selecione a Cargo</option>
+                        <option value="0" disabled selected>Selecione a Cargo</option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -167,7 +176,7 @@
                         id="funcao" 
                         name="funcao" 
                         class="form-control">
-                        <option value="" disabled selected>Selecione a Função</option>
+                        <option value="0" disabled selected>Selecione a Função</option>
                     </select>
                 </div>
             </div>
@@ -200,7 +209,7 @@
                     </select>
                 </div>          
             </div>
-        </form> 
+        </form>     
 
         <form id="EnderecoForm"> 
             <hr>
@@ -254,7 +263,8 @@
                         placeholder="Digite o CEP (00000-000)" 
                         maxlength="9" 
                         required 
-                        oninput="this.value = this.value.replace(/[^0-9-]/g, '').replace(/(\d{5})(\d{1,3})/, '$1-$2').substring(0, 9)">
+                        oninput="this.value = this.value.replace(/[^0-9-]/g, '').replace(/(\d{5})(\d{1,3})/, '$1-$2').substring(0, 9)"
+                        onblur="event.preventDefault(); validarCEP()">
                 </div>
             </div>
             <div class="row">
@@ -285,10 +295,11 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-            crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
     <!-- jQuery UI CSS -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
@@ -314,22 +325,22 @@
         });
 
         function formatarData(event) {
-            let valor = event.target.value;
+            let input = event.target;
+            let valor = input.value;
 
-            // Remove qualquer coisa que não seja um número
+            // Remover tudo que não for número
             valor = valor.replace(/\D/g, "");
 
-            // Aplica a formatação de data (DD/MM/YYYY)
-            if (valor.length <= 2) {
-                valor = valor.replace(/(\d{2})/, "$1");
-            } else if (valor.length <= 4) {
-                valor = valor.replace(/(\d{2})(\d{2})/, "$1/$2");
-            } else if (valor.length <= 8) {
-                valor = valor.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3");
+            // Adicionar a barra (/) para separar dia, mês e ano
+            if (valor.length >= 3) {
+                valor = valor.slice(0, 2) + "/" + valor.slice(2);
+            }
+            if (valor.length >= 6) {
+                valor = valor.slice(0, 5) + "/" + valor.slice(5, 9);
             }
 
-            // Atualiza o valor do input com a data formatada
-            event.target.value = valor;
+            // Atualizar o valor do input com a data formatada
+            input.value = valor;
         }
 
         function mascaraCelular(input) {
@@ -381,33 +392,10 @@
                 inputElement.disabled = false;
             }
         }
-
     </script>
     <script src="./src/script/Pessoas/addPessoa.js"></script>
     <script>
         window.onload = preencherDropdowns();
-    </script>
-    <script>
-        
-        // Função para verificar o formulário
-        document.getElementById('data_nascimento').addEventListener('click', function(event) {
-        let valido = true;
-
-        // Verifica se o campo e-mail está vazio ou inválido
-        const dataNascimento = document.getElementById('data_nascimento').value;
-        const avisoNascimento = document.getElementById('avisoNascimento');
-        if (email.trim() === "" || !email.includes('@')) {
-            avisoNascimento.style.display = 'inline';
-            valido = false;
-        } else {
-            avisoNascimento.style.display = 'none';
-        }
-
-        // Se algum campo estiver inválido, evita o envio do formulário
-        if (!valido) {
-            event.preventDefault();
-        }
-        });
     </script>
 </body>
 </html>

@@ -1,18 +1,20 @@
-const fs = require('fs');
+// const fs = require('fs');  // Substitui o 'import'
 
-export function getConfigBaseUrl (){
-  fs.readFile('../../webconfig.json', 'utf-8', (err, data) => {
-  if (err) {
-    console.error('Erro ao ler arquivo de configuração', err);
-    return
-  }
+// function getConfigBaseUrl() {
+//   fs.readFile('../../webconfig.json', 'utf-8', (err, data) => {
+//     if (err) {
+//       console.error('Erro ao ler arquivo de configuração', err);
+//       return;
+//     }
 
-  const config = JSON.parse(data);
+//     const config = JSON.parse(data);
+//     const { port, baseurl } = config;  // Acesso correto às propriedades do config
 
-  const port = config.port;
-  const baseurl = config.baseurl;
+//     console.log('Porta:', port);
+//     console.log('Base URL:', baseurl);
 
-  console.log('Porta:', port);
-  console.log('Base URL:', baseurl);
-});
-}
+//     return config;
+//   });
+// }
+
+// module.exports = getConfigBaseUrl;  // Exporta a função no formato CommonJS
