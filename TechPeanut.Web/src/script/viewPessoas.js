@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             const dataFormatada = formatarData(data.dT_Nascimento);
           // Preenchendo os campos do formulário
             document.getElementById('nome').value = data.nM_Pessoa || '';
-            document.getElementById('tipoPessoa').value = data.sT_Tipo_Pessoa || '';
-            document.getElementById('cpf').value = data.cD_Documento_Pessoa || '';
+            document.getElementById('tipo_pessoa').value = data.sT_Tipo_Pessoa || '';
+            document.getElementById('documento').value = data.cD_Documento_Pessoa || '';
             document.getElementById('genero').value = data.sT_Genero || '';
             document.getElementById('data_nascimento').value = dataFormatada || '';
     }
@@ -88,6 +88,8 @@ document.addEventListener('DOMContentLoaded', async function () {
       });
   
       const dataPessoa = await responsePessoa.json();
+      // console.log(dataPessoa);
+      
       const idTelefonePessoa = dataPessoa.iD_Telefone_Principal;
     
       const TelefoneUrl = `https://localhost:62635/api/telefones/v1/${idTelefonePessoa}`;
@@ -112,11 +114,74 @@ document.addEventListener('DOMContentLoaded', async function () {
           console.log(data)
           // Preenchendo os campos do formulário
             document.getElementById('celular').value = data.telefone || '';
-            document.getElementById('tipoTelefone').value = data.sT_Tipo_Telefone || '';
+            document.getElementById('tipo').value = data.sT_Tipo_Telefone || '';
         }
     } catch (error) {
       // Caso ocorra algum erro na requisição (ex: falha de rede)
         document.getElementById('error-message').innerText = 'Erro ao conectar ao servidor.(Telefone)';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    //============================CARGO========================================
+    const CargoUrl = `https://localhost:62635/api/cargos/v1/${idPessoa}`;
+
+    try {
+      // Fazendo a requisição GET para a API
+        const response = await fetch(CargoUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+          // Exibe uma mensagem de erro se a resposta não for OK
+            const errorMessage = await response.json();
+            document.getElementById('error-message').innerText = errorMessage.message || 'Erro ao buscar dados.';
+            document.getElementById('error-message').style.display = 'block';
+        } else {
+          // Caso a resposta seja bem-sucedida
+            const data = await response.json();
+            // console.log(data);
+            
+
+          // Preenchendo os campos do formulário
+            document.getElementById('cargo').value = data.nM_Cargo || '';
+
+        }
+    } catch (error) {
+      // Caso ocorra algum erro na requisição (ex: falha de rede)
+        document.getElementById('error-message').innerText = 'Erro ao conectar ao servidor. Endereço';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    //============================FUNÇÃO========================================
+    const FuncaoUrl = `https://localhost:62635/api/funcao/v1/${idPessoa}`
+    try {
+      // Fazendo a requisição GET para a API
+        const response = await fetch(FuncaoUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+          // Exibe uma mensagem de erro se a resposta não for OK
+            const errorMessage = await response.json();
+            document.getElementById('error-message').innerText = errorMessage.message || 'Erro ao buscar dados.';
+            document.getElementById('error-message').style.display = 'block';
+        } else {
+          // Caso a resposta seja bem-sucedida
+            const data = await response.json();
+            console.log(data);
+            
+
+          // Preenchendo os campos do formulário
+            document.getElementById('funcao').value = data.nM_Funcao || '';
+
+        }
+    } catch (error) {
+      // Caso ocorra algum erro na requisição (ex: falha de rede)
+        document.getElementById('error-message').innerText = 'Erro ao conectar ao servidor. Endereço';
         document.getElementById('error-message').style.display = 'block';
     }
 });

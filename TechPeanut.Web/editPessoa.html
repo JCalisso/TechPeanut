@@ -70,7 +70,7 @@
     <!-- Conteúdo Principal -->
     <div class="container-md">
       <div style="padding: 10px;background-color: white;border-radius: 10px;">
-        <h2>Cadastrando Nova Pessoa</h2>
+        <h2>Editando Pessoa</h2>
         <hr>
         <div class="row">
           <div class="col-md-11">
@@ -116,7 +116,6 @@
                         id="documento" 
                         name="documento" 
                         class="form-control" 
-                        disabled
                         placeholder="Digite o CPF/CNPJ" 
                         required 
                         maxlength="14" 
@@ -153,23 +152,23 @@
                     <span class="aviso" id="avisoNascimento">Por favor, preencha uma data válida.</span>
                 </div> 
                 <div class="col-md-3">
-                    <label for="cargo" class="form-label"><b>Cargo</b></label>
-                    <select 
-                        id="cargo" 
-                        name="cargo" 
-                        class="form-control">
-                        <option value="" disabled selected>Selecione a Cargo</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="funcao" class="form-label"><b>Função</b></label>
-                    <select 
-                        id="funcao" 
-                        name="funcao" 
-                        class="form-control">
-                        <option value="" disabled selected>Selecione a Função</option>
-                    </select>
-                </div>
+                  <label for="cargo" class="form-label"><b>Cargo</b></label>
+                  <input 
+                      id="cargo" 
+                      name="cargo" 
+                      disabled
+                      type="text"
+                      class="form-control">
+              </div>
+              <div class="col-md-3">
+                  <label for="funcao" class="form-label"><b>Função</b></label>
+                  <input 
+                      id="funcao" 
+                      name="funcao" 
+                      disabled
+                      class="form-control"
+                      type="text">
+              </div>
             </div>
         </form>  
 
@@ -191,12 +190,12 @@
                 <div class="col-md-3">
                     <label for="tipo" class="form-label"><b>Tipo Telefone</b></label>
                     <select 
-                        id="tipoTelefone" 
+                        id="tipo" 
                         name="tipo" 
                         class="form-control" 
                         required>
-                        <option value="C">Celular</option>
-                        <option value="T">Telefone</option>
+                        <option value="C ">Celular</option>
+                        <option value="T ">Telefone</option>
                     </select>
                 </div>          
             </div>
@@ -383,7 +382,8 @@
         }
 
     </script>
-    <script src="./src/script/Pessoas/addPessoa.js"></script>
+    <!-- <script src="./src/script/Pessoas/addPessoa.js"></script> -->
+    <script src="./src/script/viewPessoas.js"></script>
     <script>
         window.onload = preencherDropdowns();
     </script>

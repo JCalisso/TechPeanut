@@ -67,7 +67,7 @@
                 <div class="row">
                     <div class="col-12 col-md-2 my-2">
                         <a href="./addPessoa.html" 
-                            class="btn btn-outline-secondary w-100 d-flex justify-content-center align-items-center" 
+                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center" 
                             style="font-size: 18px; text-decoration: none;">
                             Adicionar <span class="fa fa-plus ms-2"></span>
                         </a>
@@ -80,22 +80,61 @@
                     <div style="width: 250px;" class="users-card text-center">
                         <img src="./src/img/logoUser.jpg" alt="Foto do usuário João Cansado Saulo" class="users-photo">
                         <p class="users-name">João Cansado Saulo</p>
-                        <a href="./userView.html"><button  disabled class="card-button">Tarefas</button></a>
-                        <a href="./perfilView.html"><button   class="card-button">Perfil</button></a>
+                        <a 
+                            class="btn btn-primary" 
+                            href="">
+                            <span class="fa fa-pen"></span>
+                        </a>
+                        <a 
+                            class="btn btn-warning" 
+                            href="./perfilView.html">
+                            <span class="fa fa-eye"></span>
+                        </a>
+                        <a 
+                            class="btn btn-danger" 
+                            href="">
+                            <span class="fa fa-trash"></span>
+                        </a>
                     </div>
                     <!-- Outro Card -->
                     <div  style="width: 250px;" class="users-card text-center">
                         <img src="./src/img/RobsonPerfil.jpeg" alt="Foto do usuário Robson Caetano" class="users-photo">
                         <p class="users-name">Robson Caetano</p>
-                        <a href=""><button  disabled class="card-button">Tarefas</button></a>
-                        <a href=""><button   class="card-button">Perfil</button></a>
+                        <a 
+                            class="btn btn-primary" 
+                            href="">
+                            <span class="fa fa-pen"></span>
+                        </a>
+                        <a 
+                            class="btn btn-warning" 
+                            href="./perfilView.html">
+                            <span class="fa fa-eye"></span>
+                        </a>
+                        <a 
+                            class="btn btn-danger" 
+                            href="">
+                            <span class="fa fa-trash"></span>
+                        </a>
                     </div>
                     <!-- Outro Card -->
                     <div  style="width: 250px;" class="users-card text-center">
                         <img src="./src/img/GusttavoUser.webp" alt="Foto do usuário Gusttavo Lima" class="users-photo">
                         <p class="users-name">Gusttavo Lima</p>
-                        <a href=""><button disabled class="card-button">Tarefas</button></a>
-                        <a href=""><button  class="card-button">Perfil</button></a>
+                        <a 
+                            class="btn btn-primary" 
+                            href="">
+                            <span class="fa fa-pen"></span>
+                        </a>
+                        <a 
+                            class="btn btn-warning" 
+                            href="">
+                            <span class="fa fa-eye"></span>
+                        </a>
+                        <a 
+                            class="btn btn-danger" 
+                            onclick="função">
+                            <span class="fa fa-trash"></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -108,5 +147,77 @@
             crossorigin="anonymous">
     </script>
     <script src="./src/script/listaUsers.js"></script>
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
+    <!-- SweetAlert2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    async function deletarPessoa(idPessoa) {
+        // Função auxiliar para chamar API
+        const deletarRecurso = async (url) => {
+            try {
+                const response = await fetch(url, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+            //     if (!response.ok) {
+            //         // Retorna a mensagem de erro, se disponível
+            //         const errorMessage = await response.text();
+            //         throw new Error(errorMessage || 'Erro ao deletar o recurso.');
+            //     }
+            } catch (error) {
+                throw new Error(error.message || 'Erro ao conectar ao servidor.');
+            }
+        };
+
+        // Exibindo a mensagem de confirmação com Swal
+        Swal.fire({
+            title: 'Você tem certeza?',
+            text: 'Esta ação irá deletar o registro e não pode ser desfeita!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sim, deletar!',
+            cancelButtonText: 'Cancelar'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    // URLs para os recursos a serem deletados
+                    const urls = [
+                        `http://localhost:62635/api/telefones/v1/${idPessoa}`,
+                        `http://localhost:62635/api/enderecos/v1/${idPessoa}`,
+                        `http://localhost:62635/api/pessoas/v1/${idPessoa}`
+                        // `http://localhost:62635/api/cargos/v1/${idPessoa}`,
+                        // `http://localhost:62635/api/funcao/v1/${idPessoa}`,
+                    ];
+
+                    // Deletando cada recurso em sequência
+                    for (const url of urls) {
+                        console.log(url);
+                        
+                        await deletarRecurso(url);
+                    }
+
+                    // Exibe mensagem de sucesso
+                    Swal.fire(
+                        'Deletado!',
+                        'O registro foi deletado com sucesso.',
+                        'success'
+                    );
+
+                    // Atualizar a página ou lista de registros
+                    // location.reload();
+                } catch (error) {
+                    Swal.fire('Erro!', error.message, 'error');
+                }
+            }
+        });
+}
+</script>
+
 </body>
 </html>
