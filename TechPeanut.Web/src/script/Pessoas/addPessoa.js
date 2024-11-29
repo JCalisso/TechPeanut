@@ -82,7 +82,6 @@ async function cadastrarPessoa(event) {
   const inputGenero = document.getElementById('genero');
 
   const inputTelefone = document.getElementById('celular');
-  const inputTipoTelefone = document.getElementById('tipo');
 
   const inputRua = document.getElementById('endereco_rua');
   const inputBairro = document.getElementById('endereco_bairro');
@@ -131,17 +130,17 @@ async function cadastrarPessoa(event) {
       alert('CPF/CNPJ da pessoa não inserido(a)!');
       throw new Error('CPF/CNPJ da pessoa não inserido(a)!');
     }
+    
+    if (inputGenero.value == ''){
+      inputGenero.focus();
+      alert('Gênero da pessoa não selecionado(a)!');
+      throw new Error('Gênero da pessoa não selecionado(a)!');
+    }
 
     if (pessoa.DT_Nascimento == ''){
       inputDataNasc.focus();
       alert('Data de nascimento da pessoa não inserido(a)!');
       throw new Error('Data de nascimento da pessoa não inserido(a)!');
-    }
-
-    if (inputGenero.value == ''){
-      inputGenero.focus();
-      alert('Gênero da pessoa não selecionado(a)!');
-      throw new Error('Gênero da pessoa não selecionado(a)!');
     }
 
     //telefone
@@ -151,12 +150,6 @@ async function cadastrarPessoa(event) {
       throw new Error('Telefone não inserido(a) ou inválido!');
     }
   
-    if (inputTipoTelefone.value == ''){
-      inputTipoTelefone.focus();
-      alert('Tipo de telefone não selecionado!');
-      throw new Error('Tipo de telefone não selecionado!');
-    }
-
     // endereco
     if (inputRua.value == ''){
       inputRua.focus();
@@ -172,6 +165,7 @@ async function cadastrarPessoa(event) {
 
     if (inputBairro.value == ''){
       inputBairro.focus();
+      alert('Bairro não inserido(a)!');
       throw new Error('Bairro não inserido(a)!');
     }
     
@@ -181,15 +175,7 @@ async function cadastrarPessoa(event) {
       throw new Error('CEP não inserido(a) ou inválido!');
     }
 
-    const responsePessoa = {}
-    await executaRequisicao(url, config)
-      .then(data => {
-        responsePessoa = data;
-      })
-      .catch(error => {
-        throw new Error('Erro ao fazer a requisição:', error);
-      });
-
+    const responsePessoa = await executaRequisicao(url, config);
 
     pessoa.Id = responsePessoa.id;
 
@@ -198,8 +184,12 @@ async function cadastrarPessoa(event) {
       pessoa.ID_Telefone_Principal = ID_Telefone = await cadastrarTelefone(pessoa.Id);
       pessoa.ID_Endereco = await cadastrarEndereco();
 
-      await atualizaPessoa(pessoa);
-      btnLimparCampos();
+      const responseUpdPessoa = await atualizaPessoa(pessoa);
+      if (responseUpdPessoa){
+        alert('Usuário cadastrado com sucesso!')
+        btnLimparCampos();
+      }
+      
     }
   } catch(err){
     throw (err);
@@ -209,7 +199,7 @@ async function cadastrarPessoa(event) {
 // cadastra telefone
 async function cadastrarTelefone(ID_Pessoa){
   const inputTelefone = document.getElementById('celular');
-  const inputTipoTelefone = document.getElementById('tipo');
+  const inputTipoTelefone = document.getElementById('tipoTelefone');
   
   const telefone = {
     Id: 0,
@@ -288,6 +278,8 @@ async function cadastrarEndereco(){
 
     const responseEndereco = await executaRequisicao(url,config);
 
+    console.log(responseEndereco);
+
     endereco.Id = responseEndereco.id;
 
   } catch(error) {
@@ -305,7 +297,7 @@ async function atualizaPessoa(pessoa){
 async function excluiPessoa(Id){
   const url = `${baseurl + port}/api/pessoas/v1/${Id}`;
   const config = setConfig('DELETE', {}, false)
-  return responseExcluiPessoa = await executaRequisicao(url,config);
+  responseExcluiPessoa = await executaRequisicao(url,config);
 }
 
 async function excluiTelefone(Id){

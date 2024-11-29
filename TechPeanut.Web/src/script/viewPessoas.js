@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       return;
   }
 
-  const url = `https://localhost:62635/api/pessoas/v1/${idPessoa}`;
+  const url = `https://localhost:7188/api/pessoas/v1/${idPessoa}`;
 
   try {
       // Fazendo a requisição GET para a API

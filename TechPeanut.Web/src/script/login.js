@@ -1,4 +1,4 @@
-const baseurl = 'http://localhost:';
+const baseurl = 'https://localhost:';
 const port = '7188';
 
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
@@ -15,26 +15,15 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
       return;
   }
 
-  const url = `${baseurl + port}/api/login/v1/valida-login`;
-  const configHeaders = setConfig('GET', login, true)
+  const url = `${baseurl + port}/api/login/v1/valida-login?E_Mail=${login.email}&Senha=${login.senha}`;
+  const configHeaders = setConfig('GET', {}, false)
 
   try {
-    const response = executaRequisicao(url, configHeaders)
-
-    console.log(response);
-
-    if (!response.ok) {
-        // Exibe uma mensagem de erro se a resposta não for OK
-        const errorMessage = await response.json();
-        document.getElementById('error-message').innerText = errorMessage.message || 'Erro ao tentar fazer login.';
-        document.getElementById('error-message').style.display = 'block';
-    } else {  
-        // Caso o login seja bem-sucedido, redireciona para a página inicial
-        const data = await response.json();
-        if (data) {
-            // Aqui, você pode armazenar o token em um local apropriado, como localStorage
-            window.location.href = './listaUsers.html';  // Redireciona para a página inicial
-        }
+    const response = await executaRequisicao(url, configHeaders)
+    console.log(response[0].iD_Pessoa)
+    if (response[0]) {
+        // Aqui, você pode armazenar o token em um local apropriado, como localStorage
+        window.location.href = './listaUsers.html';  // Redireciona para a página inicial
     }
   } catch (error) {
       // Caso ocorra algum erro na requisição (ex: falha de rede)

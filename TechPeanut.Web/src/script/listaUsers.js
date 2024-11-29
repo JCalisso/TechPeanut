@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async function(event) {
-  const url = `https://localhost:62635/api/pessoas/v1`;
+  const url = `https://localhost:7188/api/pessoas/v1`;
 
   try {
       // Fazendo a requisição GET para a API
@@ -108,8 +108,9 @@ function createCards(data) {
             // Criando o botão "Delete" com o id_pessoa
             const deleteButton = document.createElement('a');
             deleteButton.classList.add('btn', 'btn-danger'); // Adicionando classes ao elemento "a"
-            deleteButton.onclick = () => deletarPessoa(person.id); // Chamando a função com o id_pessoa dinâmico
-                    
+            deleteButton.onclick = () => deletarPessoa(person); // Chamando a função com o id_pessoa dinâmico
+            
+
             // Criando o ícone dentro do botão
             const deleteButtonElement = document.createElement('span');
             deleteButtonElement.classList.add('fa', 'fa-trash'); // Adicionando classes ao elemento "span"
@@ -123,6 +124,8 @@ function createCards(data) {
             // Adicionando o card ao container
             container.appendChild(card);
                         //=====================================================================
+
+            // window.reload()
         });
     } else {    
         // Se não houver dados, exibe uma mensagem

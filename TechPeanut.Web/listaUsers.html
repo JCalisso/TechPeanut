@@ -154,25 +154,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    async function deletarPessoa(idPessoa) {
-        // Função auxiliar para chamar API
-        const deletarRecurso = async (url) => {
-            try {
-                const response = await fetch(url, {
-                    method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' }
-                });
-
-            //     if (!response.ok) {
-            //         // Retorna a mensagem de erro, se disponível
-            //         const errorMessage = await response.text();
-            //         throw new Error(errorMessage || 'Erro ao deletar o recurso.');
-            //     }
-            } catch (error) {
-                throw new Error(error.message || 'Erro ao conectar ao servidor.');
-            }
-        };
-
+    async function deletarPessoa(pessoa) {
         // Exibindo a mensagem de confirmação com Swal
         Swal.fire({
             title: 'Você tem certeza?',
@@ -183,40 +165,65 @@
             cancelButtonColor: '#3085d6',
             confirmButtonText: 'Sim, deletar!',
             cancelButtonText: 'Cancelar'
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                try {
-                    // URLs para os recursos a serem deletados
-                    const urls = [
-                        `http://localhost:62635/api/telefones/v1/${idPessoa}`,
-                        `http://localhost:62635/api/enderecos/v1/${idPessoa}`,
-                        `http://localhost:62635/api/pessoas/v1/${idPessoa}`
-                        // `http://localhost:62635/api/cargos/v1/${idPessoa}`,
-                        // `http://localhost:62635/api/funcao/v1/${idPessoa}`,
-                    ];
+        }).then(async () => {
+            try {
+                // URLs para os recursos a serem deletados
+                const urls = [
+                    `https://localhost:7188/api/telefones/v1/${pessoa.iD_Telefone_Principal}`,
+                    `https://localhost:7188/api/enderecos/v1/${pessoa.iD_Endereco}`,
+                    `https://localhost:7188/api/pessoas/v1/${pessoa.id}`
+                    // `http://localhost:62635/api/cargos/v1/${idPessoa}`,
+                    // `http://localhost:62635/api/funcao/v1/${idPessoa}`,
+                ];
 
-                    // Deletando cada recurso em sequência
-                    for (const url of urls) {
-                        console.log(url);
-                        
-                        await deletarRecurso(url);
+                console.log(urls)
+
+                // Deletando cada recurso em sequência
+                for (const url of urls) {
+                    if (!url.endsWith('0')){
+                        fetch(url, {
+                            method: 'DELETE',
+                            headers: { 'accept': '*/*' }
+                        }).then(response => {
+                            if (response.status === 204 || response.status === 205) {
+                                // 204 No Content ou 205 Reset Content não devem ter corpo
+                                return null;
+                            }
+                        }).catch(err => {
+                            throw new Error('Erro na requisição DELETE:', error);
+                        }) 
                     }
-
-                    // Exibe mensagem de sucesso
-                    Swal.fire(
-                        'Deletado!',
-                        'O registro foi deletado com sucesso.',
-                        'success'
-                    );
-
-                    // Atualizar a página ou lista de registros
-                    // location.reload();
-                } catch (error) {
-                    Swal.fire('Erro!', error.message, 'error');
                 }
+
+                // Exibe mensagem de sucesso
+                Swal.fire(
+                    'Deletado!',
+                    'O registro foi deletado com sucesso.',
+                    'success'
+                );
+
+                // Atualizar a página ou lista de registros
+                location.reload();
+            } catch (error) {
+                Swal.fire('Erro!', error.message, 'error');
             }
         });
 }
+    // async function deletarRecurso(url) {
+    //     try {
+    //         const response = await fetch(url, {
+    //             method: 'DELETE',
+    //             headers: { 'Content-Type': 'application/json' }
+    //         })
+
+    //         if (response.status === 204 || response.status === 205) {
+    //             // 204 No Content ou 205 Reset Content não devem ter corpo
+    //             return null;
+    //         }
+    //     } catch (error) {
+    //         throw new Error(error.message || 'Erro ao conectar ao servidor.');
+    //     }
+    // };   
 </script>
 
 </body>
